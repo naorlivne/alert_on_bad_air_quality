@@ -1,0 +1,192 @@
+kind: pipeline
+type: docker
+name: amd64_build
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: run_python_unit_test
+  image: python:3.9.0-alpine3.12
+  commands:
+  - pip install -r requirements.txt
+  - coverage run -m unittest
+  - codecov  --commit=$DRONE_COMMIT_SHA -v
+  environment:
+    TEST_FILES_LOCATION: test/test_files
+    CODECOV_TOKEN:
+      from_secret: codecov_token
+    AQICN_API_KEY:
+      from_secret: AQICN_API_KEY
+
+- name: docker_build_version
+  image: plugins/docker
+  when:
+    event:
+      - push
+    branch:
+      - master
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: naorlivne/alert_on_bad_air_quality
+    tags:
+      - linux-amd64
+      - linux-amd64-v${DRONE_BUILD_NUMBER}
+
+image_pull_secrets:
+- dockerconfig
+
+---
+kind: pipeline
+type: docker
+name: arm64_build
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: run_python_unit_test
+  image: python:3.9.0-alpine3.12
+  commands:
+  - pip install -r requirements.txt
+  - coverage run -m unittest
+  - codecov  --commit=$DRONE_COMMIT_SHA
+  environment:
+    TEST_FILES_LOCATION: test/test_files
+    CODECOV_TOKEN:
+      from_secret: codecov_token
+    AQICN_API_KEY:
+      from_secret: AQICN_API_KEY
+
+- name: docker_build_version
+  image: plugins/docker
+  when:
+    event:
+      - push
+    branch:
+      - master
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: naorlivne/alert_on_bad_air_quality
+    tags:
+      - linux-arm64
+      - linux-arm64-v${DRONE_BUILD_NUMBER}
+
+image_pull_secrets:
+- dockerconfig
+
+---
+kind: pipeline
+type: docker
+name: publish_docker_manifest
+
+trigger:
+  event:
+  - push
+  branch:
+  - master
+
+steps:
+- name: manifest
+  image: plugins/manifest
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target:  naorlivne/alert_on_bad_air_quality
+    template: naorlivne/alert_on_bad_air_quality:OS-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm64
+
+depends_on:
+- amd64_build
+- arm64_build
+
+---
+kind: pipeline
+type: docker
+name: publish_docker_manifest_build_number
+
+trigger:
+  event:
+  - push
+  branch:
+  - master
+
+steps:
+- name: manifest
+  image: plugins/manifest
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target:  naorlivne/alert_on_bad_air_quality:v${DRONE_BUILD_NUMBER}
+    template: naorlivne/alert_on_bad_air_quality:OS-ARCH-v${DRONE_BUILD_NUMBER}
+    platforms:
+      - linux/amd64
+      - linux/arm64
+
+depends_on:
+- amd64_build
+- arm64_build
+
+---
+kind: pipeline
+type: docker
+name: publish_changelog
+
+trigger:
+  event:
+  - push
+  branch:
+  - master
+
+steps:
+- name: create_changelog
+  image: naorlivne/drone-github-changelog-generator
+  settings:
+    github_user: ${DRONE_REPO_NAMESPACE}
+    github_project: ${DRONE_REPO_NAME}
+    output_path: CHANGELOG.md
+  environment:
+    CHANGELOG_GITHUB_TOKEN:
+      from_secret: changelog_github_token
+
+depends_on:
+- amd64_build
+- arm64_build
+
+---
+kind: pipeline
+type: docker
+name: notify
+
+steps:
+- name: notify
+  image: drillster/drone-email
+  settings:
+    host: aspmx.l.google.com
+    port: 25
+    from: dronealert@dronealert.com
+    recipients: [ naorlivne@gmail.com ]
+    recipients_only: true
+
+trigger:
+  status:
+  - failure
+
+depends_on:
+- publish_docker_manifest
+- publish_docker_manifest_build_number
+- publish_changelog
