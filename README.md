@@ -21,7 +21,7 @@ alert_on_bad_air_quality uses sane defaults, but they can all be easily changed:
 | value                  | envvar                 | default value          | notes                                                                                                  |
 |------------------------|------------------------|------------------------|--------------------------------------------------------------------------------------------------------|
 |  aqicn_api_key         | AQICN_API_KEY          |                        | You can get a free one at https://aqicn.org/api/                                                       |
-|  city                  | CITY                   |                        | The city you want to be alerted should it air quality will go bad (make sure to check https://aqicn.org/api/ it's available first)                                     |
+|  city                  | CITY                   |                        | The city you want to be alerted should it air quality will go bad (make sure to check https://aqicn.org/api/ it's available first) |
 | smtp_server            | SMTP_SERVER            |                        | SMTP server address which mail is sent through (SSL/TLS enabled)                                       |
 | sender_email           | SENDER_EMAIL           |                        | Email address to send the alert out of                                                                 |
 | receiver_email         | RECEIVER_EMAIL         |                        | Email address to send the alert to                                                                     |
