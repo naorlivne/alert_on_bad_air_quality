@@ -1,8 +1,6 @@
-from cachetools import cached, TTLCache
 import requests
 
 
-@cached(cache=TTLCache(maxsize=32, ttl=60))
 def air_quality_index(api_key: str, city: str) -> int:
     """
     Returns current air quality
