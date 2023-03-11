@@ -2,7 +2,7 @@
 
 A simple job designed to run inside a cron wrapper of some sort (pick your poison as each orchestrator/cloud provider has its own way of doing scheduled jobs nowadays) that will alert via telegram & email when it looks like it the air quality is bad then exit (it's not long-running as again it's designed to run inside a cron scheduler of some kind).
 
-Drone.io CI/CD unit tests & auto push status: [![Build Status](https://cloud.drone.io/api/badges/naorlivne/alert_on_bad_air_quality/status.svg)](https://cloud.drone.io/naorlivne/alert_on_bad_air_quality)
+Github actions CI unit tests & auto dockerhub push status: [![CI/CD](https://github.com/naorlivne/alert_on_bad_air_quality/actions/workflows/full_ci_cd_workflow.yml/badge.svg)](https://github.com/naorlivne/alert_on_bad_air_quality/actions/workflows/full_ci_cd_workflow.yml)
 
 Code coverage: [![codecov](https://codecov.io/gh/naorlivne/alert_on_bad_air_quality/branch/master/graph/badge.svg)](https://codecov.io/gh/naorlivne/alert_on_bad_air_quality)
 

@@ -6,3 +6,16 @@ updates:
     interval: daily
     time: "10:00"
   open-pull-requests-limit: 10
+  labels:
+  - enhancement
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "10:00"
+- package-ecosystem: docker
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
