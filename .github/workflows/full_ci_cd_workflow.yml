@@ -29,7 +29,6 @@ jobs:
       - name: Test
         run: |
           coverage run -m unittest
-          codecov  -t  ${{ secrets.CODECOV_TOKEN }}
         env:
           AQICN_API_KEY: ${{ secrets.AQICN_API_KEY }}
       - name: Upload coverage to Codecov
