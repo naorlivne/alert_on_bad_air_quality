@@ -1,5 +1,5 @@
 certifi==2023.5.7
-charset-normalizer==3.1.0
+charset-normalizer==3.2.0
 configobj==5.0.8
 coverage==7.2.7
 dpath==2.1.6
