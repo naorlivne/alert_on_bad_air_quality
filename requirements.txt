@@ -2,7 +2,7 @@ certifi==2024.6.2
 charset-normalizer==3.3.2
 configobj==5.0.8
 coverage==7.5.3
-dpath==2.1.6
+dpath==2.2.0
 idna==3.7
 parse-it==2024.5.30.10.31
 pyhcl==0.4.5
