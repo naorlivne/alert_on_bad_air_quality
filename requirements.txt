@@ -1,7 +1,7 @@
 certifi==2024.6.2
 charset-normalizer==3.3.2
 configobj==5.0.8
-coverage==7.5.4
+coverage==7.6.0
 dpath==2.2.0
 idna==3.7
 parse-it==2024.6.20.9.7
