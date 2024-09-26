@@ -11,7 +11,7 @@ class BaseTests(TestCase):
 
     def test_telegram_send_alert(self):
         with requests_mock.Mocker() as request_mocker:
-            request_mocker.post('https://api.telegram.org/123:now_with_colon/sendMessage?chat_id=123'
+            request_mocker.post('https://api.telegram.org/bot123:now_with_colon/sendMessage?chat_id=123'
                                 '&text=Subject%3A+Bad+air+quality%0A%0A++++++++++++This+message+is+to+alert+you+it+'
                                 'looks+like+there+is+bad+air+quality.%0A++++++++++++',
                                 status_code=200, text='{"ok":true,"result":{"message_id":85,"from":{"id":123,'
