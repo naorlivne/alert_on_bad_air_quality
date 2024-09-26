@@ -3,7 +3,7 @@ charset-normalizer==3.3.2
 configobj==5.0.9
 coverage==7.5.4
 dpath==2.2.0
-idna==3.7
+idna==3.10
 parse-it==2024.6.20.9.7
 pyhcl==0.4.5
 pyTelegramBotAPI==4.23.0
