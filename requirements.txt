@@ -4,7 +4,7 @@ configobj==5.0.9
 coverage==7.6.5
 dpath==2.2.0
 idna==3.10
-parse-it==2024.11.7.10.36
+parse-it==2024.11.18.10.11
 pyhcl==0.4.5
 pyTelegramBotAPI==4.23.0
 python-dotenv==1.0.1
