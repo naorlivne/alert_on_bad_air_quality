@@ -6,7 +6,7 @@ dpath==2.2.0
 idna==3.10
 parse-it==2024.11.20.9.55
 pyhcl==0.4.5
-pyTelegramBotAPI==4.24.0
+pyTelegramBotAPI==4.26.0
 python-dotenv==1.0.1
 PyYAML==6.0.2
 requests==2.32.3
