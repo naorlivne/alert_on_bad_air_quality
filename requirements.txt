@@ -8,7 +8,7 @@ parse-it==2025.3.1.21.46
 pyhcl==0.4.5
 python-dotenv==1.1.1
 pyTelegramBotAPI==4.29.1
-PyYAML==6.0.2
+PyYAML==6.0.3
 requests==2.32.5
 requests-mock==1.12.1
 six==1.17.0
