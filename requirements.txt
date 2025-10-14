@@ -1,5 +1,5 @@
 certifi==2025.8.3
-charset-normalizer==3.4.3
+charset-normalizer==3.4.4
 configobj==5.0.9
 coverage==7.10.6
 dpath==2.2.0
